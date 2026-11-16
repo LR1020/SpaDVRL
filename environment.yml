@@ -1,0 +1,13 @@
+name: spamcsrl
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - r-base=4.0.3
+  - r-mclust
+  - pip:
+      - -r requirements.txt
+

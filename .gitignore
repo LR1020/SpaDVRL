@@ -1,0 +1,30 @@
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.idea/
+.vscode/
+.DS_Store
+
+# Locally downloaded real datasets and generated outputs are not versioned.
+data/*
+outputs/
+*.h5ad
+*.h5
+*.npz
+*.npy
+*.pt
+*.pth
+
+# R and notebook state.
+.Rhistory
+.RData
+.ipynb_checkpoints/
+
+# Keep the fixed simulated benchmark distributed with this repository.
+!data/README.md
+!data/Simulate_data_RNA_Protein/
+!data/Simulate_data_RNA_Protein/adata_RNA.h5ad
+!data/Simulate_data_RNA_Protein/adata_Protein.h5ad
+
