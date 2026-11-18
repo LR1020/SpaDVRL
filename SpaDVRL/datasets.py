@@ -1,4 +1,4 @@
-"""Dataset loaders matching the final SpaMCSRL experiments."""
+"""Dataset loaders matching the final SpaDVRL experiments."""
 
 from __future__ import annotations
 

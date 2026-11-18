@@ -317,7 +317,7 @@ class _BaseTrainer:
         output = {'emb_latent_omics1': emb_omics1.detach().cpu().numpy(),
                   'emb_latent_omics2': emb_omics2.detach().cpu().numpy(),
                   'emb_proj_align': emb_proj_align.detach().cpu().numpy(),
-                  'SpaMCSRL': emb_combined.detach().cpu().numpy(),
+                  'SpaDVRL': emb_combined.detach().cpu().numpy(),
                   'emb_shared_combined': emb_shared.detach().cpu().numpy(),
                   'emb_private_combined': emb_private.detach().cpu().numpy(),
                   'emb_shared_omics1': emb_shared_omics1.detach().cpu().numpy(),

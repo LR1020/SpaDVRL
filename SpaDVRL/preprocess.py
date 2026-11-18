@@ -223,7 +223,7 @@ def adjacent_matrix_preprocessing(adata_omics1, adata_omics2, feature_fusion_mod
                 feature_fusion_mode
             )
         )
-    # SpaMCSRL already has an explicit spatial branch. Here we keep the
+    # SpaDVRL already has an explicit spatial branch. Here we keep the
     # context branch focused on cross-omics molecular associations to avoid
     # double-counting spatial smoothing.
     if feature_fusion_mode == 'union':

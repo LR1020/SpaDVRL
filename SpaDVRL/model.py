@@ -3,8 +3,8 @@ import torch
 from .backbone import Encoder_overall, grad_reverse
 
 
-class _SpaMCSRLCoreModel(Encoder_overall):
-    """Formal SpaMCSRL architecture with the retired branches removed.
+class _SpaDVRLCoreModel(Encoder_overall):
+    """Formal SpaDVRL architecture with the retired branches removed.
 
     The retained modules are initialized through the original constructor before
     inactive residual modules are deleted. This preserves initialization parity
@@ -190,7 +190,7 @@ class _SpaMCSRLCoreModel(Encoder_overall):
         }
 
 
-class SpaMCSRLModel(_SpaMCSRLCoreModel):
+class SpaDVRLModel(_SpaDVRLCoreModel):
     """Final model: both modality-specific decoders reconstruct from final Z."""
 
     def forward(self, *args, **kwargs):

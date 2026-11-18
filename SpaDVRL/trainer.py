@@ -4,11 +4,11 @@ from tqdm import tqdm
 
 from .base_trainer import _BaseTrainer
 
-from .model import _SpaMCSRLCoreModel, SpaMCSRLModel
+from .model import _SpaDVRLCoreModel, SpaDVRLModel
 
 
-class _TrainSpaMCSRLCore(_BaseTrainer):
-    """Trainer for the formal SpaMCSRL configuration.
+class _TrainSpaDVRLCore(_BaseTrainer):
+    """Trainer for the formal SpaDVRL configuration.
 
     Fixed design:
       - no cross-modal correspondence loss;
@@ -21,8 +21,8 @@ class _TrainSpaMCSRLCore(_BaseTrainer):
     SHARED_ADV_WEIGHT = 1.0
     PRIVATE_CLS_WEIGHT = 0.3
     DISENTANGLE_WEIGHT = 1.0
-    MODEL_VERSION = "SpaMCSRL_common_specific_representation_learning"
-    MODEL_CLASS = _SpaMCSRLCoreModel
+    MODEL_VERSION = "SpaDVRL_adaptive_dual_view_representation_learning"
+    MODEL_CLASS = _SpaDVRLCoreModel
 
     def __init__(self, *args, **kwargs):
         locked = {
@@ -40,7 +40,7 @@ class _TrainSpaMCSRLCore(_BaseTrainer):
         for name, expected in locked.items():
             if name in kwargs and kwargs[name] != expected:
                 raise ValueError(
-                    f"{name} is locked to {expected!r} in TrainSpaMCSRL."
+                    f"{name} is locked to {expected!r} in TrainSpaDVRL."
                 )
         kwargs.update(locked)
         super().__init__(*args, **kwargs)
@@ -157,7 +157,7 @@ class _TrainSpaMCSRLCore(_BaseTrainer):
             loss.backward()
             self.optimizer.step()
 
-        print("SpaMCSRL training finished!\n")
+        print("SpaDVRL training finished!\n")
         with torch.no_grad():
             self.model.eval()
             results = self.model(
@@ -186,7 +186,7 @@ class _TrainSpaMCSRLCore(_BaseTrainer):
                 eps=1e-12,
                 dim=1,
             ),
-            "SpaMCSRL": F.normalize(
+            "SpaDVRL": F.normalize(
                 results["emb_latent_combined"], p=2, eps=1e-12, dim=1
             ),
             "emb_shared_combined": F.normalize(
@@ -260,8 +260,8 @@ class _TrainSpaMCSRLCore(_BaseTrainer):
         return output
 
 
-class TrainSpaMCSRL(_TrainSpaMCSRLCore):
-    """Trainer for the released SpaMCSRL model described in the manuscript."""
+class TrainSpaDVRL(_TrainSpaDVRLCore):
+    """Trainer for the released SpaDVRL model described in the manuscript."""
 
-    MODEL_VERSION = "SpaMCSRL_final_Z_reconstruction"
-    MODEL_CLASS = SpaMCSRLModel
+    MODEL_VERSION = "SpaDVRL_final_Z_reconstruction"
+    MODEL_CLASS = SpaDVRLModel

@@ -1,4 +1,4 @@
-"""Single-seed experiment pipeline for public SpaMCSRL examples."""
+"""Single-seed experiment pipeline for public SpaDVRL examples."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from scipy.optimize import linear_sum_assignment
 
 from .datasets import set_seed
 from .evaluation import clustering_metrics, mclust_eee
-from .trainer import TrainSpaMCSRL
+from .trainer import TrainSpaDVRL
 
 
 SEED = 2024
@@ -205,7 +205,7 @@ def _plot_embedding(
     axis.set_box_aspect(1)
     if equal_aspect:
         axis.set_aspect("equal")
-    _style_axis(axis, "SpaMCSRL")
+    _style_axis(axis, "SpaDVRL")
     _add_legend(axis, legend, palette)
     figure.subplots_adjust(left=0.05, right=0.78, bottom=0.05, top=0.92)
     _save_figure(figure, output_dir, stem)
@@ -227,7 +227,7 @@ def run_seed2024_experiment(
     umap_seed: int,
     device_name: str,
 ) -> None:
-    """Train SpaMCSRL once with seed 2024 and save clustering and UMAP plots."""
+    """Train SpaDVRL once with seed 2024 and save clustering and UMAP plots."""
 
     output_dir.mkdir(parents=True, exist_ok=True)
     set_seed(SEED)
@@ -236,7 +236,7 @@ def run_seed2024_experiment(
         device_name if torch.cuda.is_available() and device_name != "cpu" else "cpu"
     )
 
-    trainer = TrainSpaMCSRL(
+    trainer = TrainSpaDVRL(
         data=data,
         datatype=datatype,
         device=device,
@@ -255,7 +255,7 @@ def run_seed2024_experiment(
         feature_fusion_mode="equal",
     )
     result = trainer.train()
-    embedding = np.asarray(result["SpaMCSRL"], dtype=np.float32)
+    embedding = np.asarray(result["SpaDVRL"], dtype=np.float32)
     labels = mclust_eee(embedding, n_clusters, SEED)
     metrics = clustering_metrics(truth, labels)
 
@@ -330,7 +330,7 @@ def run_seed2024_experiment(
     ) as handle:
         json.dump(configuration, handle, indent=2)
     np.savez_compressed(
-        output_dir / f"{stem}_SpaMCSRL_seed2024.npz",
+        output_dir / f"{stem}_SpaDVRL_seed2024.npz",
         embedding=embedding,
         labels=labels,
         truth=np.asarray(truth),

@@ -268,7 +268,7 @@ class Encoder_overall(Module):
 
 
 class ModalityAwareMambaFusion(Module):
-    """Adaptive fusion of two modality-common representations."""
+    """Bidirectional gated fusion of the adversarially guided representations."""
 
     SUPPORTED_MODES = ('conv_gate', 'bidirectional_gate', 'adaptive_weighting', 'concat')
     BIDIRECTIONAL_RESIDUAL_SCALE = 0.2
