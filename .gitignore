@@ -1,3 +1,4 @@
+# SpaDVRL development caches and local artifacts.
 __pycache__/
 *.py[cod]
 *.so

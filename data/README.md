@@ -1,4 +1,7 @@
-# Data
+# SpaDVRL data
+
+This directory documents the datasets used to reproduce the SpaDVRL
+experiments.
 
 ## Simulated dataset
 
